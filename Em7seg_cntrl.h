@@ -62,7 +62,7 @@ const uint8_t Numbers[NUM_SEGMENTS_ARRAY_LEN] = {
 
 #include <Wire.h>
 
-class WireType {
+class MCP23017Type {
 private:
   uint8_t MCP23017_ADDRESS = 0x20;
   bool    available        = false;
@@ -124,12 +124,12 @@ public:
         digitalWriteMCP(i, HIGH);
       }
 #if LOGLEVEL > 2
-      pf(F("WireType: init MCP23017 with address %#01x done\n"),addr);
+      pf(F("MCP23017Type: init MCP23017 with address %#01x done\n"),addr);
 #endif
       available = true;
       return true;
     }
-    pf(F("WireType: no MCP23017 found at address %#01x\n"),addr);
+    pf(F("MCP23017Type: no MCP23017 found at address %#01x\n"),addr);
     available = false;
     return false;
   }
@@ -140,7 +140,7 @@ public:
 };
 
 template <class WIREType>
-class SegmentModul {
+class EM7Module {
 protected:
   WIREType w;
 private:
@@ -200,9 +200,9 @@ public:
   }
 };
 
-class DisplayWithSegmentModules {
+class EM7ModuleArray {
 protected:
-  SegmentModul<WireType> segmentModule[8];
+  EM7Module<MCP23017Type> em7Module[8];
 private:
   uint32_t pows [8] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000 } ;
   uint8_t mod_cnt = 0;
@@ -213,8 +213,8 @@ public:
       Wire.begin();
       Wire.beginTransmission(addr);
       if (Wire.endTransmission() == 0) {
-        pf(F("Found module at address %#01x, added to segmentModule[%d]\n"), addr, mod_cnt);
-        segmentModule[mod_cnt++].init(addr);
+        pf(F("Found module at address %#01x, added to em7Module[%d]\n"), addr, mod_cnt);
+        em7Module[mod_cnt++].init(addr);
         //mod_cnt++;
       }
     }
@@ -225,7 +225,7 @@ public:
     pf(F("DisplayWithSegmentModules: displaySingleDigit(uint8_t module, uint8_t num) with %d, %d\n"), module, num_idx);
     if (module > 0 && module <= mod_cnt) {
       if (num_idx > 0 && num_idx < NUM_SEGMENTS_ARRAY_LEN) {
-        segmentModule[module - 1].showSegments(Numbers[num_idx]);
+        em7Module[module - 1].showSegments(Numbers[num_idx]);
       } else {
         pf(F("displaySingleDigit: given number index (%i) is out of range (0 ... %d)\n"), num_idx, NUM_SEGMENTS_ARRAY_LEN);
       }
@@ -258,7 +258,7 @@ public:
       if (negative) digits[len] = NUM_MINUS;
 
       for (uint8_t i = 0; i < mod_cnt; i++) {
-        segmentModule[i].showSegments(Numbers[digits[i]]);
+        em7Module[i].showSegments(Numbers[digits[i]]);
       }
     } else {
       Serial.println(F("Number has too many digits"));
@@ -270,7 +270,7 @@ public:
       pf(F("DisplayWithSegmentModules: displayAll() with %d\n"), number);
 #endif
     for (uint8_t i = 0; i < mod_cnt; i++) {
-      segmentModule[i].showSegments(Numbers[number]);
+      em7Module[i].showSegments(Numbers[number]);
     }
   }
 
@@ -284,11 +284,11 @@ public:
   void round_cw() {
     uint8_t b = 1;
     for (uint8_t i = 0; i < 6; i++){
-      segmentModule[0].showSegments(b);
+      em7Module[0].showSegments(b);
       b=b*2;
       delay(160);
     }
-    segmentModule[0].showSegments(0);
+    em7Module[0].showSegments(0);
   }
 
 };

@@ -4,7 +4,7 @@
 #include "Em7seg_cntrl.h"
 
 
-DisplayWithSegmentModules d;
+EM7ModuleArray d;
 
 void setup() {
   Serial.begin(57600);
@@ -15,7 +15,7 @@ void setup() {
   delay(500);
   d.round_cw();
   d.round_cw();
-  delay(500);
+  d.round_cw();
 
   for (uint8_t j = 0; j < 5; j++) {
     for (uint8_t i = 0; i <10; i++) {
