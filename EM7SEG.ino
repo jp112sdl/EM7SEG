@@ -1,11 +1,10 @@
-//#define DRY_RUN
-#define LOGLEVEL 3
+#define LOGLEVEL 0
 
 #include "printf_helper.h"
 #include "Em7seg_cntrl.h"
 
 
-DisplayWithSegmentModules<1> d;
+DisplayWithSegmentModules d;
 
 void setup() {
   Serial.begin(57600);
@@ -13,19 +12,19 @@ void setup() {
   d.init();
   d.clear();
 
-  delay(1000);
+  delay(500);
+  d.round_cw();
+  d.round_cw();
+  delay(500);
 
-  //Serial.println("======");
-  //d.displayNumber(6);
-  //Serial.println("======");
-  //d.displayNumber(8);
-  //Serial.println("======");
-
-  for (uint8_t i = 0; i <10; i++) {
+  for (uint8_t j = 0; j < 5; j++) {
+    for (uint8_t i = 0; i <10; i++) {
       d.displayNumber(i);
-  //  d.displaySingleDigit(1, i);
-    delay(1000);
+      delay((j*100)+50);
+    }
   }
+
+  d.displayNumber(0);
 
 }
 
