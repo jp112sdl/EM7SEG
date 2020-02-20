@@ -17,7 +17,7 @@ void setup() {
   d.round_cw();
   d.round_cw();
 
-  for (uint8_t j = 0; j < 5; j++) {
+  for (uint8_t j = 0; j < 3; j++) {
     for (uint8_t i = 0; i <10; i++) {
       d.displayNumber(i);
       delay((j*100)+50);
