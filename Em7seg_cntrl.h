@@ -13,7 +13,7 @@
 #define MCP23017_OLATA  0x14
 #define MCP23017_OLATB  0x15
 
-#define INDICATOR_LED     14
+#define INDICATOR_LED_PIN 14
 #define ON  1
 #define OFF 0
 
@@ -121,7 +121,7 @@ public:
       writeRegister(MCP23017_IODIRB,0xff);
       for (uint8_t i = 0; i < 15; i++){
         pinMode(i, OUTPUT);
-        digitalWriteMCP(i, HIGH);
+        digitalWriteMCP(i, LOW);
       }
 #if LOGLEVEL > 2
       pf(F("MCP23017Type: init MCP23017 with address %#01x done\n"),addr);
@@ -139,34 +139,12 @@ public:
   }
 };
 
-template <class WIREType>
+template <class MCP23017Type>
 class EM7Module {
 protected:
-  WIREType w;
+  MCP23017Type w;
 private:
   byte segmentStatus;
-
-public:
-  bool init(uint8_t addr) {
-    if (w.init(addr) == true) {
-      for (uint8_t i = 0; i < 7; i++) {
-        setSeg(i, 0);
-      }
-      segmentStatus = 0b00000000;
-      return true;
-    }
-    return false;
-  }
-
-  void setIndicatorLED(bool state) {
-    w.setPin(INDICATOR_LED, state);
-  }
-
-  void setIdle (uint8_t seg) {
-    w.setPin( seg * 2,      HIGH);
-    w.setPin((seg * 2) + 1, HIGH);
-    setIndicatorLED(ON);
-  }
 
   void setSeg (uint8_t seg, bool state) {
     setIndicatorLED(OFF);
@@ -189,12 +167,36 @@ public:
 #endif
   }
 
+public:
+  bool init(uint8_t addr) {
+    if (w.init(addr) == true) {
+      for (uint8_t i = 0; i < 7; i++) {
+        setSeg(i, 0);
+      }
+      segmentStatus = 0b00000000;
+      return true;
+    }
+    return false;
+  }
+
+  void setIndicatorLED(bool state) {
+    w.setPin(INDICATOR_LED_PIN, state);
+  }
+
+  void setIdle (uint8_t seg) {
+    w.setPin( seg * 2,      LOW);
+    w.setPin((seg * 2) + 1, LOW);
+    setIndicatorLED(ON);
+  }
+
   void showSegments(uint8_t segments) {
-    for (uint8_t i = 0; i < 8; i++){
-      uint8_t b  = bitRead(segments & 0xff,  i);
-      uint8_t st = bitRead(segmentStatus, i);
-      if (st != b) {
-        setSeg(i, b);
+    if (segments != segmentStatus) {
+      for (uint8_t i = 0; i < 8; i++){
+        uint8_t b  = bitRead(segments & 0xff,  i);
+        uint8_t st = bitRead(segmentStatus, i);
+        if (st != b) {
+          setSeg(i, b);
+        }
       }
     }
   }
@@ -213,9 +215,8 @@ public:
       Wire.begin();
       Wire.beginTransmission(addr);
       if (Wire.endTransmission() == 0) {
-        pf(F("Found module at address %#01x, added to em7Module[%d]\n"), addr, mod_cnt);
+        pf(F("Found module[%d] at address %#01x\n"), addr, mod_cnt);
         em7Module[mod_cnt++].init(addr);
-        //mod_cnt++;
       }
     }
     pf(F("Init done. Found %d modules\n"), mod_cnt);
