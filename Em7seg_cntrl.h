@@ -215,7 +215,7 @@ public:
       Wire.begin();
       Wire.beginTransmission(addr);
       if (Wire.endTransmission() == 0) {
-        pf(F("Found module[%d] at address %#01x\n"), addr, mod_cnt);
+        pf(F("Found module[%d] at address %#01x\n"), mod_cnt, addr);
         em7Module[mod_cnt++].init(addr);
       }
     }
