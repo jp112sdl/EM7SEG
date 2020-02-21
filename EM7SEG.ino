@@ -47,22 +47,13 @@ void setup() {
      Serial.print(".");
      delay(2000);
   }
-
 }
-
-
-
-void digitalClockDisplay(){
-  p("%d:%d:%d %d:%d:%d \n", hour(), minute(), second(), day(), month(), year());
-
-}
-
 
 unsigned long getDCFTime() {
   time_t DCFtime = DCF.getTime();
   // Indicator that a time check is done
   if (DCFtime!=0) {
-    Serial.print("X");
+    Serial.println("Time set for syncProvider success");
   }
   return DCFtime;
 }
@@ -71,7 +62,7 @@ void loop() {
   if( now() != prevDisplay) //update the display only if the time has changed
   {
     prevDisplay = now();
-    digitalClockDisplay();
+    p("%02d:%02d:%02d %02d.%02d.%d \n", hour(), minute(), second(), day(), month(), year());
   }
 
 }
