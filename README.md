@@ -1,6 +1,9 @@
 # EM7SEG
 electro-mechanical 7 segment display (from dresser/wayne display)
 
+<img src="Images/IMG_0844.jpg" height=400 /><img src="Images/IMG_0845.jpg" height=400 />
+<img src="Images/IMG_0846.jpg" height=400 /><img src="Images/IMG_0847.jpg" height=400 />
+
 **Parts**
 | Ref | Wert | Package | JLCPCB Part |
 |--------|--------|--------|--------|
