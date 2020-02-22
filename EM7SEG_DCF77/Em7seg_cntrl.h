@@ -68,6 +68,7 @@ private:
   bool    available        = false;
 
   bool initWire(uint8_t addr) {
+    Wire.begin();
     Wire.beginTransmission(addr);
     return (Wire.endTransmission() == 0);
   }
@@ -209,9 +210,9 @@ private:
   uint8_t mod_cnt = 0;
 public:
   void init() {
-    Wire.begin();
     for (uint8_t i = 0; i < 8; i++) {
       uint8_t addr = 0x20 + i;
+      Wire.begin();
       Wire.beginTransmission(addr);
       if (Wire.endTransmission() == 0) {
         pf(F("Found module[%d] at address %#01x\n"), mod_cnt, addr);
@@ -221,16 +222,14 @@ public:
     pf(F("Init done. Found %d modules\n"), mod_cnt);
   }
 
-  void showSegments(uint8_t module, uint8_t segments) {
-    em7Module[module-1].showSegments(segments);
+  void showSegments(uint8_t module, uint8_t segements) {
+    em7Module[module].showSegments(segements);
   }
 
   void displaySingleDigit(uint8_t module, uint8_t num_idx) {
-#if LOGLEVEL > 0
     pf(F("DisplayWithSegmentModules: displaySingleDigit(uint8_t module, uint8_t num) with %d, %d\n"), module, num_idx);
-#endif
     if (module > 0 && module <= mod_cnt) {
-      if (num_idx < NUM_SEGMENTS_ARRAY_LEN) {
+      if (num_idx > 0 && num_idx < NUM_SEGMENTS_ARRAY_LEN) {
         em7Module[module - 1].showSegments(Numbers[num_idx]);
       } else {
         pf(F("displaySingleDigit: given number index (%i) is out of range (0 ... %d)\n"), num_idx, NUM_SEGMENTS_ARRAY_LEN);
