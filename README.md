@@ -19,3 +19,8 @@ electro-mechanical 7 segment display (from dresser/wayne display)
 
 
 ![driver_pcb](PCB/EM7SEG_DRIVER_L9110S/EM7SEG_DRIVER.png)
+
+## UPDATE 05.03.2020
+### Die Platinen sind angekommen 😍
+#### ... und ich habe vergessen, einen Motortreiber (U3) bestücken zu lassen 😤 _(aber gut, das ist kein Problem, den MCP23017 muss ich ohnehin noch selbst auflöten)_
+<img src="Images/IMG_0911.jpg" height=400 /><img src="Images/IMG_0912.jpg" height=400 />
