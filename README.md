@@ -11,10 +11,10 @@ electro-mechanical 7 segment display (from dresser/wayne display)
 | R1-R4,R8-R21 | 10k | 0805 | C17414 |
 | R5, R6 | 330 | 0805 | C17630 |
 | R7 | 1k | 0805 | C17513 |
-| U3 - U9 | L9110S | TSSOP-8 | C85174 |
 | D1, D2 | LED green | 0805 | C2297 |
 | D3 | LED red | 0805 | C72038 |
 | U2 | MCP23017-E/SS | SSOP | - |
+| U3 - U9 | L9110S | TSSOP-8 | - |
 | J1, J2 | Pin Header 5x | RM 2.0mm | - |
 
 
