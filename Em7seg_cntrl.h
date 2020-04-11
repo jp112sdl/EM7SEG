@@ -253,7 +253,7 @@ private:
   uint32_t pows [8] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000 } ;
   uint8_t mod_cnt = 0;
 public:
-  void init() {
+  uint8_t init() {
     Wire.begin();
     for (uint8_t i = 0; i < 8; i++) {
       uint8_t addr = 0x20 + i;
@@ -264,6 +264,7 @@ public:
       }
     }
     pf(F("Init done. Found %d modules\n"), mod_cnt);
+    return mod_cnt;
   }
 
   void showSegments(uint8_t module, uint8_t segments) {
