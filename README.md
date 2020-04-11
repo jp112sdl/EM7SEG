@@ -24,3 +24,20 @@ electro-mechanical 7 segment display (from dresser/wayne display)
 ### Die Platinen sind angekommen 😍
 #### ... und ich habe vergessen, einen Motortreiber (U3) bestücken zu lassen 😤 _(aber gut, das ist kein Problem, den MCP23017 muss ich ohnehin noch selbst auflöten)_
 <img src="Images/IMG_0911.jpg" height=400 /><img src="Images/IMG_0912.jpg" height=400 />
+
+## UPDATE 10.04.2020
+### Nach einem kleinen Redesign, sind am 09.04.2020 die Platinen V2.0 gekommen,
+#### ...die einen Tag später "verarbeitet wurden"
+#### Am schwierigsten war der MCP23017 (SSOP) aufzulöten. Von Hand! 
+<img src="Images/IMG_1070.jpeg" height=400 />
+
+**Ein Mal angefangen, wurden gleich alle Platinen aufgebaut**</br>
+<img src="Images/IMG_1074.jpeg" height=400 />
+
+**und mit den Displaymodulen "verheiratet"**</br>
+<img src="Images/IMG_1079.jpeg" height=400 />
+
+
+## UPDATE 11.04.2020
+# Die Uhr läuft!
+<img src="Images/IMG_1084.jpeg" height=400 />
