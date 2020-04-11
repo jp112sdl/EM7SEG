@@ -286,7 +286,7 @@ public:
     }
   }
 
-  void displayNumber(long num) {
+  void displayNumber(long num, bool leadingZero, bool alignRight=true) {
     long range = pow(10, mod_cnt);
     if (num > (-1 * range) && num < range) {
       uint8_t digits[mod_cnt];
@@ -307,17 +307,30 @@ public:
       for (uint8_t i = 0; i < len; i++) {
         digits[i] = abs(num) / pows[i] % 10;
       }
+
       if (negative) digits[len] = NUM_MINUS;
 
-      for (uint8_t i = 0; i < mod_cnt; i++) {
-        em7Module[i].showSegments(Numbers[digits[i]]);
+      if (alignRight) {
+        for (uint8_t i = 0; i < mod_cnt; i++) {
+          if (leadingZero==false && i >= len)
+            em7Module[i].showSegments(Numbers[NUM_OFF]);
+          else
+            em7Module[i].showSegments(Numbers[digits[i]]);
+        }
+      } else {
+        Serial.println("align left");
+        for (uint8_t i = 0; i < mod_cnt; i++) {
+          em7Module[mod_cnt - i].showSegments(Numbers[ (i > len) ? NUM_OFF : digits[len - i]]);
+        }
       }
+
+
     } else {
-      Serial.println(F("Number has too many digits"));
+      pf(F("Number has too many digits\n"));
     }
   }
 
-  void displayAll(uint8_t number) {
+  void displayNumberAll(uint8_t number) {
 #if LOGLEVEL > 2
       pf(F("DisplayWithSegmentModules: displayAll() with %d\n"), number);
 #endif
