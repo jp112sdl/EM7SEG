@@ -4,7 +4,7 @@ electro-mechanical 7 segment display (from dresser/wayne display)
 <img src="Images/IMG_0844.jpg" height=400 /><img src="Images/IMG_0845.jpg" height=400 />
 <img src="Images/IMG_0846.jpg" height=400 /><img src="Images/IMG_0847.jpg" height=400 />
 
-**Parts**
+**Teile**
 | Ref | Wert | Package | JLCPCB Part |
 |--------|--------|--------|--------|
 | C1, C2 | 100n | 0805 | C49678 |
@@ -16,6 +16,15 @@ electro-mechanical 7 segment display (from dresser/wayne display)
 | U2 | MCP23017-E/SS | SSOP | - |
 | U3 - U9 | L9110S | TSSOP-8 | - |
 | J1, J2 | Pin Header 5x | RM 2.0mm | - |
+
+**Pin Header Zuordnung**
+| Pin | Beschreibung |
+|--------|--------|
+| 1 | GND |
+| 2 | Vcc Logik +3.3V / 5V|
+| 3 | SDA |
+| 4 | SCL |
+| 5 | Vcc Segmentspulen 7.5-9V |
 
 
 ![driver_pcb](PCB/EM7SEG_DRIVER_L9110S/EM7SEG_DRIVER.png)
