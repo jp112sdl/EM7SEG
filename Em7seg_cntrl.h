@@ -30,7 +30,29 @@
 #define NUM_SEGMENTS_9   0b01101111  //       --------
 #define NUM_SEGMENTS_OFF 0b00000000  //        SegD:3
 #define NUM_SEGMENTS_MIN 0b01000000  //
-#define SEG_INV          0b00000000  // <- change polarity for single segment
+
+#define CHR_SEGMENTS_A   { 65,  0b01110111 }
+#define CHR_SEGMENTS_C   { 67,  0b00111001 }
+#define CHR_SEGMENTS_E   { 69,  0b01111001 }
+#define CHR_SEGMENTS_F   { 70,  0b01110001 }
+#define CHR_SEGMENTS_H   { 72,  0b01110110 }
+#define CHR_SEGMENTS_I   { 73,  NUM_SEGMENTS_1 }
+#define CHR_SEGMENTS_L   { 76,  0b00111000 }
+#define CHR_SEGMENTS_O   { 79,  NUM_SEGMENTS_0 }
+#define CHR_SEGMENTS_P   { 80,  0b01110011 }
+#define CHR_SEGMENTS_S   { 83,  NUM_SEGMENTS_5 }
+#define CHR_SEGMENTS_U   { 85,  0b00111110 }
+#define CHR_SEGMENTS_b   { 98,  0b01111100 }
+#define CHR_SEGMENTS_c   { 99,  0b01011000 }
+#define CHR_SEGMENTS_d   { 100, 0b01011110 }
+#define CHR_SEGMENTS_n   { 110, 0b01010100 }
+#define CHR_SEGMENTS_o   { 111, 0b01011100 }
+#define CHR_SEGMENTS_r   { 114, 0b01010000 }
+#define CHR_SEGMENTS_t   { 116, 0b01111000 }
+#define CHR_SEGMENTS_u   { 117, 0b00011100 }
+
+
+#define SEG_INV          0b11111111  // <- change polarity for single segment
 
 #define NUM_SEGMENTS_ARRAY_LEN   12
 const uint8_t Numbers[NUM_SEGMENTS_ARRAY_LEN] = {
@@ -46,6 +68,29 @@ const uint8_t Numbers[NUM_SEGMENTS_ARRAY_LEN] = {
     NUM_SEGMENTS_9,
     NUM_SEGMENTS_OFF,
     NUM_SEGMENTS_MIN};
+
+#define CHR_SEGMENTS_ARRAY_LEN 19
+const uint8_t Characters[CHR_SEGMENTS_ARRAY_LEN][2] = {
+    CHR_SEGMENTS_A,
+    CHR_SEGMENTS_C,
+    CHR_SEGMENTS_E,
+    CHR_SEGMENTS_F,
+    CHR_SEGMENTS_H,
+    CHR_SEGMENTS_I,
+    CHR_SEGMENTS_L,
+    CHR_SEGMENTS_O,
+    CHR_SEGMENTS_P,
+    CHR_SEGMENTS_S,
+    CHR_SEGMENTS_U,
+    CHR_SEGMENTS_b,
+    CHR_SEGMENTS_c,
+    CHR_SEGMENTS_d,
+    CHR_SEGMENTS_n,
+    CHR_SEGMENTS_o,
+    CHR_SEGMENTS_r,
+    CHR_SEGMENTS_t,
+    CHR_SEGMENTS_u
+};
 
 #define NUM_0      0
 #define NUM_1      1
@@ -280,11 +325,44 @@ public:
     }
   }
 
+  void displaySingleChar(uint8_t module, char chr) {
+#if LOGLEVEL > 0
+    pf(F("DisplayWithSegmentModules: displaySingleChar(uint8_t module, char chr) with %d, %d\n"), module, chr);
+#endif
+    if (module > 0 && module <= mod_cnt) {
+      uint8_t chr_idx = 255;
+      for (uint8_t i = 0; i < CHR_SEGMENTS_ARRAY_LEN; i++) {
+        if (chr == Characters[i][0]) {
+          chr_idx = i;
+          break;
+        }
+      }
+      if (chr_idx < 255) {
+        em7Module[module - 1].showSegments(Characters[chr_idx][1]);
+      } else {
+        pf(F("displaySingleChar: character not found \n"));
+      }
+    } else {
+      pf(F("selected module (%i) is out of range. must be 1 ... %d\n"),module, mod_cnt);
+    }
+  }
+
+  void displayWord(const char * txt) {
+
+    if (strlen(txt) > mod_cnt) {
+      pf(F("displayWord: text length exceeds module count"));
+    } else {
+      for (uint8_t i = 0; i < strlen(txt); i++) {
+        displaySingleChar(strlen(txt)-i,txt[i]);
+      }
+    }
+  }
+
   void clear() {
 #if LOGLEVEL > 2
       Serial.println(F("DisplayWithSegmentModules: clear()"));
 #endif
-    displayAll(NUM_OFF);
+      displayNumberAll(NUM_OFF);
   }
 };
 
