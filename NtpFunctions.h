@@ -17,7 +17,6 @@ const PROGMEM char *ntpServer = "pool.ntp.org";
 
 boolean syncEventTriggered = false; // True if a time event has been triggered
 NTPSyncEvent_t ntpEvent; // Last triggered event
-uint8_t lastSecond = 0;
 
 void processSyncEvent (NTPSyncEvent_t ntpEvent) {
     if (ntpEvent < 0) {
@@ -44,9 +43,9 @@ void setNTPSettings() {
     syncEventTriggered = true;
   });
 
-  NTP.setInterval (10);
-  NTP.setNTPTimeout (NTP_TIMEOUT);
-  NTP.begin (ntpServer, timeZone, true, minutesTimeZone);
+  NTP.setInterval(600);
+  NTP.setNTPTimeout(NTP_TIMEOUT);
+  NTP.begin(ntpServer, timeZone, true, minutesTimeZone);
 }
 
 void checkSyncEventTriggered() {

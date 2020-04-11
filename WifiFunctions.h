@@ -29,13 +29,11 @@ void doWifiConnect() {
   WiFi.begin(ssid, key);
   int waitCounter = 0;
   //WiFi.config(IPAddress(192, 168, 1, 17), IPAddress(192, 168, 1, 1), IPAddress(255, 255, 255, 0), IPAddress(192, 168, 1, 1));
-  uint8_t b = 1;
+  d.displayWord("Conn");
   while (WiFi.status() != WL_CONNECTED) {
     waitCounter++;
     Serial.print(".");
-    b = b*2;
-    if (b==64) b= 1;
-    d.showSegments(1,b);
+
     if (waitCounter == 20) {
       ESP.restart();
     }
