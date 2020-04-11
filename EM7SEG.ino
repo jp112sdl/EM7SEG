@@ -7,13 +7,17 @@ EM7ModuleArray d;
 #include "WiFiFunctions.h"
 #include "NtpFunctions.h"
 
+uint8_t lastMinute;
 
 void setup() {
   Serial.begin(57600);
   Serial.println("Start");
-  d.init();
+  uint8_t moduleCount = d.init();
+  if (moduleCount == 0) {
+    ESP.restart();
+  }
   d.clear();
-
+  delay(200);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
   doWifiConnect();
@@ -24,15 +28,11 @@ void setup() {
 void loop() {
   checkSyncEventTriggered();
 
-  if (lastSecond != second()) {
-    p("%01d%01d\n",hour(),minute());
-
-    uint8_t s = second();
-    for (uint8_t i = 0; i < 6; i++) {
-      if (s >= 10) s -= 10;
-    }
-    d.displaySingleDigit(1, s);
-    lastSecond = second();
+  if (lastMinute != minute()) {
+    lastMinute = minute();
+    uint16_t t = (hour()*100)+minute();
+    p("%01d\n",t);
+    d.displayNumber(t, true);
   }
 
   delay(0);
