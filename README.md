@@ -1,7 +1,7 @@
 # EM7SEG
 electro-mechanical 7 segment display (from dresser/wayne display)
 <img src="Images/IMG_1092.gif" height=400 /><br/>
-_example: use 4 of that nice vintage modules as a clock_
+_example: use 4 of that nice vintage modules as a clock with a wemos d1 mini, that is getting its time from an ntp service through wifi_
 
 
 <img src="Images/IMG_0844.jpg" height=400 /><img src="Images/IMG_0845.jpg" height=400 />
