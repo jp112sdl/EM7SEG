@@ -189,6 +189,7 @@ protected:
   MCP23017Type w;
 private:
   byte segmentStatus;
+  uint16_t dly = 0;
 
   void setSeg (uint8_t seg, bool state) {
     setIndicatorLED(OFF);
@@ -233,13 +234,18 @@ public:
     setIndicatorLED(ON);
   }
 
+  void setSegToSegDelayMillis(uint16_t d) {
+    dly = d;
+  }
+
   void showSegments(uint8_t segments) {
     if (segments != segmentStatus) {
       for (uint8_t i = 0; i < 8; i++){
-        uint8_t b  = bitRead(segments & 0xff,  i);
-        uint8_t st = bitRead(segmentStatus, i);
+        uint8_t b  = bitRead(segments & 0xff, i);
+        uint8_t st = bitRead(segmentStatus,   i);
         if (st != b) {
           setSeg(i, b);
+          delay(dly);
         }
       }
     }
@@ -252,6 +258,7 @@ protected:
 private:
   uint32_t pows [8] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000 } ;
   uint8_t mod_cnt = 0;
+  uint16_t dly = 0;
 public:
   uint8_t init(uint8_t ENABLE_PIN=0) {
     if (ENABLE_PIN != 0) {
@@ -273,6 +280,13 @@ public:
     }
     pf(F("Init done. Found %d modules\n"), mod_cnt);
     return mod_cnt;
+  }
+
+  void setSegToSegDelayMillis(uint16_t d) {
+    for (uint8_t i = 0; i < mod_cnt; i++) {
+      dly = d;
+      em7Module[i].setSegToSegDelayMillis(dly);
+    }
   }
 
   void showSegments(uint8_t module, uint8_t segments) {
@@ -381,10 +395,14 @@ public:
   }
 
   void clear() {
+    uint16_t _dly = dly;
+    setSegToSegDelayMillis(0);
 #if LOGLEVEL > 2
       Serial.println(F("DisplayWithSegmentModules: clear()"));
 #endif
-      displayNumberAll(NUM_OFF);
+    displayNumberAll(NUM_OFF);
+
+    setSegToSegDelayMillis(_dly);
   }
 };
 
