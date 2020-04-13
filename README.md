@@ -1,5 +1,8 @@
 # EM7SEG
 electro-mechanical 7 segment display (from dresser/wayne display)
+<img src="Images/IMG_1092.gif" height=400 /><br/>
+_example: use 4 of that nice vintage modules as a clock_
+
 
 <img src="Images/IMG_0844.jpg" height=400 /><img src="Images/IMG_0845.jpg" height=400 />
 <img src="Images/IMG_0846.jpg" height=400 /><img src="Images/IMG_0847.jpg" height=400 />
@@ -49,4 +52,6 @@ electro-mechanical 7 segment display (from dresser/wayne display)
 
 ## UPDATE 11.04.2020
 # Die Uhr läuft!
-<img src="Images/IMG_1084.jpeg" height=400 />
+<img src="Images/IMG_1084.jpeg" height=400 /><br/>
+<img src="Images/IMG_1093.jpeg" height=400 />
+
