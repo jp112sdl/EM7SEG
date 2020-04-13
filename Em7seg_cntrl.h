@@ -224,7 +224,7 @@ public:
   }
 
   void setIndicatorLED(bool state) {
-    w.setPin(INDICATOR_LED_PIN, state);
+    //w.setPin(INDICATOR_LED_PIN, state);
   }
 
   void setIdle (uint8_t seg) {
