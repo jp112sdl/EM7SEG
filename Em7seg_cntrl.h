@@ -253,7 +253,15 @@ private:
   uint32_t pows [8] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000 } ;
   uint8_t mod_cnt = 0;
 public:
-  uint8_t init() {
+  uint8_t init(uint8_t ENABLE_PIN=0) {
+    if (ENABLE_PIN != 0) {
+      pinMode(ENABLE_PIN, OUTPUT);
+      digitalWrite(ENABLE_PIN, HIGH);
+      delay(100);
+      digitalWrite(ENABLE_PIN, LOW);
+      delay(100);
+    }
+
     Wire.begin();
     for (uint8_t i = 0; i < 8; i++) {
       uint8_t addr = 0x20 + i;
