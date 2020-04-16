@@ -6,6 +6,8 @@
 #ifndef EM7SEG_CNTRL_H_
 #define EM7SEG_CNTRL_H_
 
+#include "printf_helper.h"
+
 #define MCP23017_IODIRA 0x00
 #define MCP23017_IODIRB 0x01
 #define MCP23017_GPIOA  0x12
@@ -31,6 +33,7 @@
 #define NUM_SEGMENTS_OFF 0b00000000  //        SegD:3
 #define NUM_SEGMENTS_MIN 0b01000000  //
 
+#define CHR_SEGMENTS_MIN { 45,  NUM_SEGMENTS_MIN }
 #define CHR_SEGMENTS_A   { 65,  0b01110111 }
 #define CHR_SEGMENTS_C   { 67,  0b00111001 }
 #define CHR_SEGMENTS_E   { 69,  0b01111001 }
@@ -69,8 +72,9 @@ const uint8_t Numbers[NUM_SEGMENTS_ARRAY_LEN] = {
     NUM_SEGMENTS_OFF,
     NUM_SEGMENTS_MIN};
 
-#define CHR_SEGMENTS_ARRAY_LEN 19
+#define CHR_SEGMENTS_ARRAY_LEN 20
 const uint8_t Characters[CHR_SEGMENTS_ARRAY_LEN][2] = {
+    CHR_SEGMENTS_MIN,
     CHR_SEGMENTS_A,
     CHR_SEGMENTS_C,
     CHR_SEGMENTS_E,
@@ -225,13 +229,13 @@ public:
   }
 
   void setIndicatorLED(bool state) {
-    //w.setPin(INDICATOR_LED_PIN, state);
+    w.setPin(INDICATOR_LED_PIN, state);
   }
 
   void setIdle (uint8_t seg) {
     w.setPin( seg * 2,      LOW);
     w.setPin((seg * 2) + 1, LOW);
-    setIndicatorLED(ON);
+    //setIndicatorLED(ON);
   }
 
   void setSegToSegDelayMillis(uint16_t d) {
@@ -386,7 +390,7 @@ public:
   void displayWord(const char * txt) {
 
     if (strlen(txt) > mod_cnt) {
-      pf(F("displayWord: text length exceeds module count"));
+      pf(F("displayWord: text length exceeds module count\n"));
     } else {
       for (uint8_t i = 0; i < strlen(txt); i++) {
         displaySingleChar(strlen(txt)-i,txt[i]);

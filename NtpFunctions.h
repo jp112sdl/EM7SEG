@@ -9,7 +9,7 @@
 #include <NTPClientLib.h>
 
 #define SHOW_TIME_PERIOD 5000
-#define NTP_TIMEOUT 1500
+#define NTP_TIMEOUT      2500
 
 int8_t timeZone = 1;
 int8_t minutesTimeZone = 0;
@@ -43,7 +43,7 @@ void setNTPSettings() {
     syncEventTriggered = true;
   });
 
-  NTP.setInterval(600);
+  NTP.setInterval(3600);
   NTP.setNTPTimeout(NTP_TIMEOUT);
   NTP.begin(ntpServer, timeZone, true, minutesTimeZone);
 }
