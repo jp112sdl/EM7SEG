@@ -167,7 +167,7 @@ public:
     if (initWire(MCP23017_ADDRESS) == true) {
       writeRegister(MCP23017_IODIRA,0xff);
       writeRegister(MCP23017_IODIRB,0xff);
-      for (uint8_t i = 0; i < 15; i++){
+      for (uint8_t i = 0; i < 16; i++){
         pinMode(i, OUTPUT);
         digitalWriteMCP(i, LOW);
       }
