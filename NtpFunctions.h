@@ -6,7 +6,7 @@
 #ifndef NTPFUNCTIONS_H_
 #define NTPFUNCTIONS_H_
 #include "WiFiFunctions.h"
-#include <NTPClientLib.h>
+#include <NtpClientLib.h>
 
 #define SHOW_TIME_PERIOD 5000
 #define NTP_TIMEOUT      2500
