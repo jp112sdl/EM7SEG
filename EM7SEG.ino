@@ -102,6 +102,12 @@ void setup() {
   server.begin();
 }
 
+void showtime(uint8_t h, uint8_t m) {
+  uint16_t t = ((h*100)+m);
+  p("%01d\n",t);
+  d.displayNumber(t, true);
+}
+
 void loop() {
   checkSyncEventTriggered();
   ArduinoOTA.handle();
@@ -123,15 +129,15 @@ void loop() {
     d.setSegToSegDelayMillis(segDly);
 
     delay(300);
-  }
 
-  //if minute changes, refresh display
-  if (lastMinute != m) {
+    showtime(h, m);
+
     lastMinute = m;
-
-    uint16_t t = ((h*100)+m);
-    p("%01d\n",t);
-    d.displayNumber(t, true);
+  }
+  //if minute changes, refresh display
+  else if (lastMinute != m) {
+    lastMinute = m;
+    showtime(h, m);
   }
 
   delay(0);
