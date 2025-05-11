@@ -1,3 +1,9 @@
 Release
 PCB/EM7SEG_DRIVER_L9110S_MCP23017SS/EM7SEG_DRIVER-backups
 PCB/EM7SEG_DRIVER_L9110S_PCF8575TS/EM7SEG_DRIVER-backups
+.cproject
+.spec.d
+sloeber.ino.cpp
+.project
+.settings/language.settings.xml
+.settings/org.eclipse.cdt.core.prefs
