@@ -1,0 +1,23 @@
+G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,8.0.7*
+G04 #@! TF.CreationDate,2025-05-03T20:28:39+02:00*
+G04 #@! TF.ProjectId,EM7SEG_DRIVER,454d3753-4547-45f4-9452-495645522e6b,rev?*
+G04 #@! TF.SameCoordinates,Original*
+G04 #@! TF.FileFunction,Profile,NP*
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 8.0.7) date 2025-05-03 20:28:39*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+G04 #@! TA.AperFunction,Profile*
+%ADD10C,0.100000*%
+G04 #@! TD*
+G04 APERTURE END LIST*
+D10*
+X52585620Y-65468500D02*
+X25577800Y-65468500D01*
+X25577800Y-26619201D01*
+X52590700Y-26619200D01*
+X52585620Y-65468500D01*
+M02*

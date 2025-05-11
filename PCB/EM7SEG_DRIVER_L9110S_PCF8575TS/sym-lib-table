@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name L9110)(type Legacy)(uri ${KIPRJMOD}/additional/L9110.lib)(options "")(descr ""))
+  (lib (name EM7SEG_DRIVER-rescue)(type Legacy)(uri ${KIPRJMOD}/EM7SEG_DRIVER-rescue.lib)(options "")(descr ""))
+)
