@@ -1,0 +1,6 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "L9110") (type "Legacy") (uri "${KIPRJMOD}/additional/L9110.lib") (options "") (descr ""))
+	(lib (name "L293DD") (type "KiCad") (uri "${KIPRJMOD}/additional/L293DD.kicad_sym") (options "") (descr ""))
+	(lib (name "FP7SEG_DRIVER-cache") (type "Legacy") (uri "/Users/pechj/Documents/Arduino/ECHT-Einsatz/EM7SEG/PCB/FP7SEG_DRIVER_DRV8848_PCF8575TS/FP7SEG_DRIVER-cache.lib") (options "") (descr "Legacy project cache library"))
+)

@@ -1,0 +1,23 @@
+G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,10.0.0*
+G04 #@! TF.CreationDate,2026-04-04T23:40:08+02:00*
+G04 #@! TF.ProjectId,FP7SEG_DRIVER,46503753-4547-45f4-9452-495645522e6b,rev?*
+G04 #@! TF.SameCoordinates,Original*
+G04 #@! TF.FileFunction,Profile,NP*
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 10.0.0) date 2026-04-04 23:40:08*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+G04 #@! TA.AperFunction,Profile*
+%ADD10C,0.100000*%
+G04 #@! TD*
+G04 APERTURE END LIST*
+D10*
+X52686162Y-64432129D02*
+X25577800Y-64448500D01*
+X25577800Y-27480000D01*
+X52663834Y-27460004D01*
+X52686162Y-64432129D01*
+M02*
