@@ -8,3 +8,5 @@ sloeber.ino.cpp
 .settings/language.settings.xml
 .settings/org.eclipse.cdt.core.prefs
 spec.d
+secrets.h
+EM7SEG-Thermometer
