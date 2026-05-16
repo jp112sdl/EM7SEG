@@ -8,7 +8,7 @@
 
 #include "printf_helper.h"
 #include "Em7seg_cntrl.h"
-EM7ModuleArray d;
+EM7ModuleArray<MCP23017Type, 4> d;
 
 #include "WiFiFunctions.h"
 #include "NtpFunctions.h"
